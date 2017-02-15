@@ -22,28 +22,31 @@ var tickXPos = function(index, width, size) {
 
 var createEmptyEntry = function() {
     return {
-        value: {
             percentage:0,
             games:0
-        }
     }
 }
 
-var drawChart = function(width, height, keys, values) {
+var drawChart = function(ratios) {
+            var values = ratios.values()
+            var keys = ratios.keys()
             values.unshift(createEmptyEntry());
             keys.unshift("");
-            values.push(createEmptyEntry());
-            keys.push("");
+
+            var height = 100;
+            var width = values.length * (barWidth + barPadding);
+
+
             var svg = d3.select("body").append("svg").attr("width", width).attr("height", height);
 
             svg.selectAll("rect").data(values).enter().append("rect")
                 .attr("width", barWidth)
-        	    .attr("height", function(entry){return barHeight(height, entry.value.percentage, entry.value.games)})
-        	    .attr("y", function(entry){ return barYPos(height, entry.value.percentage, entry.value.games) } )
-        	    .attr("x", function(entry, index){return tickXPos(index, width, values.length)-barWidth/2});
+        	    .attr("height", function(value){return barHeight(height, value.percentage, value.games)})
+        	    .attr("y", function(value){ return barYPos(height, value.percentage, value.games) } )
+        	    .attr("x", function(value, index){return tickXPos(index, width, values.length)-barWidth/2});
 
 
-            var xRange = d3.range(values.length).map(function(index){return tickXPos(index, width, values.length)})
+            var xRange = d3.range(values.length +1).map(function(index){return tickXPos(index, width, values.length)})
             var xScale = d3.scaleOrdinal(xRange).domain(keys);
             var xAxis = d3.axisBottom(xScale);
             svg.append("g")
@@ -52,10 +55,10 @@ var drawChart = function(width, height, keys, values) {
                 .style("text-anchor", "end")
                 .attr("dx", "-.8em")
                 .attr("dy", ".15em")
-                .attr("transform", "rotate(-65)");
+                .attr("transform", "rotate(-55)");
 
-            var yRange = d3.range(10).map(function(d){return d*height/10});
-            var yScale = d3.scaleLinear().range([height,0]).domain([0,1]);
+            var yRange = d3.range(5).map(function(d){return (4-d)*height/4});
+            var yScale = d3.scaleOrdinal().range(yRange).domain([0,25,50,75,100]);
             var yAxis = d3.axisLeft(yScale);
             svg.append("g").call(yAxis);
 }
@@ -94,7 +97,7 @@ var draw = function() {
             })
 
 
-            drawChart(500, 300, ratios.keys(), ratios.entries())
+            drawChart(ratios)
 
           });
 }
