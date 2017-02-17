@@ -76,12 +76,12 @@ for (line <- bufferedSource.getLines) {
 
 val writer = Files.newBufferedWriter(Paths.get("D:\\Development\\projects\\naf_crunch\\src\\eurogames.csv"))
 
-writer.write("tournament,race,opponentrace,games,wins,draws,losses,percentage")
+writer.write("tournament,race,opponentrace,games,wins,draws,losses,year")
 writer.newLine()
 for ((tournament,races) <- tournaments; (race,opposingraces)<-races; (opponentrace,ratio )<- opposingraces)
   yield {
 if (ratio.games > 0) {
-  writer.write(s"${tournament},${race},${opponentrace},${ratio.games},${ratio.wins},${ratio.draws},${ratio.losses},${ratio.percentage()}")
+  writer.write(s"${tournament},${race},${opponentrace},${ratio.games},${ratio.wins},${ratio.draws},${ratio.losses},${tournament.split(" ").last}")
   writer.newLine()
 }
   }

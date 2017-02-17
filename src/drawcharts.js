@@ -1,7 +1,8 @@
-let barWidth = 10;
-let barPadding = 5;
-let xAxisMargin = 5;
-let noWinHeight = 1;
+const barWidth = 10;
+const barPadding = 5;
+const xAxisMargin = 5;
+const noWinHeight = 1;
+
 let barHeight = function(maxHeight, percentage, games) {
     if (percentage>0) {
         return percentage*maxHeight;
@@ -71,9 +72,12 @@ let draw = function() {
 
           let filterMap = d3.map();
           filterMap.set('year', undefined);
-          filterMap.set('tournament', ['EuroBowl - 2003']);
-          filterMap.set('race', ['Amazons']);
+          filterMap.set('tournament', ['EuroBowl - 2003', 'EuroBowl - 2006']);
+          filterMap.set('race', ['Amazons', 'Norse']);
           filterMap.set('opponentrace', []);
+
+          let splitFields = ["year", "tournament", "race"];
+
           let filteredData = dataset.filter(function(ratio){
 
               let accept = true;
@@ -90,29 +94,37 @@ let draw = function() {
             let ratios = d3.map();
 
             filteredData.forEach(function(singleRatio){
-                let field = 'race';
-                console.log('singleRatio: ' + singleRatio[field]+ ' vs ' + singleRatio.opponentrace)
 
-                if (!ratios.has(singleRatio.opponentrace)) {
-                    ratios.set(singleRatio.opponentrace, {'games':0, 'wins':0, 'draws':0, 'losses':0, 'isRatio': true})
-                }
-                let ratio = ratios.get(singleRatio.opponentrace)
-                ratio.games += +singleRatio.games
-                ratio.wins += +singleRatio.wins
-                ratio.draws += +singleRatio.draws
-                ratio.losses += +singleRatio.losses
+                mapRatio(ratios, splitFields, singleRatio);
+
             })
 
-
-            ratios.entries().forEach(function(entry){
-                entry.value.percentage = (+entry.value.wins + +entry.value.draws/2)/+entry.value.games
-
-                console.log('Entry:' +entry.key + ' ' + JSON.stringify(entry.value) )
-            })
-
-
+            console.log(JSON.stringify(ratios))
             drawChart(ratios)
 
           });
+}
+
+let mapRatio = function(ratioMap, splitFields, singleRatio) {
+
+                    let key = splitFields[0];
+                    let value = singleRatio[key];
+
+                    if (splitFields.length > 1) {
+                        if (!ratioMap.has(value)) {
+                          ratioMap.set(value, d3.map());
+                        }
+                        return mapRatio(ratioMap.get(value), splitFields.slice(1), singleRatio);
+                    }
+
+                    if (!ratioMap.has(value)) {
+                        ratioMap.set(value, {'games':0, 'wins':0, 'draws':0, 'losses':0})
+                    }
+                    let cummulativeRatio = ratioMap.get(value)
+                    cummulativeRatio.games += +singleRatio.games
+                    cummulativeRatio.wins += +singleRatio.wins
+                    cummulativeRatio.draws += +singleRatio.draws
+                    cummulativeRatio.losses += +singleRatio.losses
+                    cummulativeRatio.percentage = (cummulativeRatio.wins + cummulativeRatio.draws/2)/cummulativeRatio.games;
 }
 
