@@ -1,8 +1,10 @@
-const barWidth = 10;
-const barPadding = 5;
-const xAxisMargin = 5;
+const scaleMultiplier = 5;
+const barWidth = scaleMultiplier * 2;
+const barPadding = scaleMultiplier;
+const xAxisMargin = scaleMultiplier;
 const noWinHeight = 1;
-const graphHeight = 100;
+const graphHeight = scaleMultiplier*20;
+const axisHeight = scaleMultiplier*10;
 
 let barHeight = function(maxHeight, percentage, games) {
     if (percentage>0) {
@@ -102,7 +104,7 @@ let drawChart = function(ratios, splitFields) {
                 .attr('dy', '.15em')
                 .attr('transform', 'rotate(-55)');
 
-            let axisGap = 50;
+            let axisGap = axisHeight;
             splitFields.slice(1).forEach(function(field){
                 let ticks = tickPos.get(field);
                 console.log("field: "+ field)
@@ -111,10 +113,21 @@ let drawChart = function(ratios, splitFields) {
                 let scale = d3.scaleOrdinal(range).domain(allLabels.get(field));
                 let axis = d3.axisBottom(scale);
                  svg.append('g')
-                                .attr('transform', 'translate(0, '+(graphHeight+50+axisGap)+')')
-                                .call(axis)
+                                .attr('transform', 'translate(0, '+(graphHeight+axisHeight+axisGap)+')')
+                                .call(axis).attr('class', 'lineAxis')
 
-                 axisGap += 50
+
+                let textTicks = createTextTicks(ticks)
+
+                let textRange = d3.range(textTicks.length).map(function(index){return textTicks[index]});
+
+                let textScale = d3.scaleOrdinal(textRange).domain(allLabels.get(field));
+                let textAxis = d3.axisBottom(textScale);
+                 svg.append('g').attr('class', 'textAxis')
+                                .attr('transform', 'translate(0, '+(graphHeight+axisHeight+axisGap)+')')
+                                .call(textAxis)
+
+                 axisGap += axisHeight
             })
 
             let yRange = d3.range(5).map(function(d){return (4-d)*graphHeight/4});
@@ -123,6 +136,15 @@ let drawChart = function(ratios, splitFields) {
             svg.append('g').call(yAxis);
 }
 
+let createTextTicks = function(ticks) {
+    let textTicks = [0]
+    for (let index = 1; index<ticks.length; index++) {
+        console.log(index)
+        textTicks.push((ticks[index]+ticks[index-1])/2)
+    }
+    textTicks.push(ticks.slice(-1)[0])
+    return textTicks;
+}
 
 let draw = function() {
   let dataset;

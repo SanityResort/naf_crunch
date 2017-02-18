@@ -1,5 +1,13 @@
 svg {
     padding-top: 1rem;
     padding-left: 2rem;
-    padding-bottom: 15rem
+    padding-bottom: 15rem;
+    padding-right: 1rem;
 }
+
+.textAxis path,
+.textAxis line,
+.lineAxis text {
+    visibility: hidden
+}
+
