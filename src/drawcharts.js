@@ -5,6 +5,7 @@ const xAxisMargin = scaleMultiplier;
 const noWinHeight = 1;
 const graphHeight = scaleMultiplier*20;
 const axisHeight = scaleMultiplier*10;
+const barGroupPadding = scaleMultiplier*6
 
 let barHeight = function(maxHeight, percentage, games) {
     if (percentage>0) {
@@ -35,7 +36,13 @@ let populateTickPos = function(ratios, splitFields, tickPos, offset, allRatios, 
     if (splitFields.length > 0) {
         let ticks = tickPos.get(splitFields[0]);
         ratios.keys().sort().forEach(function(key){
-            offset = populateTickPos(ratios.get(key), splitFields.slice(1), tickPos, offset, allRatios, allLabels) + barPadding
+            let padding = 0;
+            if (splitFields.length == 1) {
+                padding = 0;
+            } else if (splitFields.length == 2) {
+                padding = barGroupPadding;
+            }
+            offset = populateTickPos(ratios.get(key), splitFields.slice(1), tickPos, offset, allRatios, allLabels) + padding
             ticks.push(offset)
         })
 
@@ -98,7 +105,8 @@ let drawChart = function(ratios, splitFields) {
             let xAxis = d3.axisBottom(xScale);
             svg.append('g')
                 .attr('transform', 'translate(0, '+graphHeight+')')
-                .call(xAxis).selectAll('text')
+                .call(xAxis).attr('class', 'barAxis')
+                .selectAll('text')
                 .style('text-anchor', 'end')
                 .attr('dx', '-.8em')
                 .attr('dy', '.15em')
@@ -107,8 +115,11 @@ let drawChart = function(ratios, splitFields) {
             let axisGap = axisHeight;
             splitFields.slice(1).forEach(function(field){
                 let ticks = tickPos.get(field);
-                console.log("field: "+ field)
-                console.log("ticks: " + JSON.stringify(ticks))
+                let textTicks = createTextTicks(ticks);
+
+                if (ticks.slice(-1)[0] != width) {
+                    ticks.push(width)
+                }
                 let range = d3.range(ticks.length).map(function(index){return ticks[index]});
                 let scale = d3.scaleOrdinal(range).domain(allLabels.get(field));
                 let axis = d3.axisBottom(scale);
@@ -117,13 +128,12 @@ let drawChart = function(ratios, splitFields) {
                                 .call(axis).attr('class', 'lineAxis')
 
 
-                let textTicks = createTextTicks(ticks)
 
                 let textRange = d3.range(textTicks.length).map(function(index){return textTicks[index]});
 
                 let textScale = d3.scaleOrdinal(textRange).domain(allLabels.get(field));
                 let textAxis = d3.axisBottom(textScale);
-                 svg.append('g').attr('class', 'textAxis')
+                var graphic = svg.append('g').attr('class', 'textAxis')
                                 .attr('transform', 'translate(0, '+(graphHeight+axisHeight+axisGap)+')')
                                 .call(textAxis)
 
@@ -139,7 +149,6 @@ let drawChart = function(ratios, splitFields) {
 let createTextTicks = function(ticks) {
     let textTicks = [0]
     for (let index = 1; index<ticks.length; index++) {
-        console.log(index)
         textTicks.push((ticks[index]+ticks[index-1])/2)
     }
     textTicks.push(ticks.slice(-1)[0])

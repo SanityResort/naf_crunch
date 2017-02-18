@@ -7,7 +7,6 @@ svg {
 
 .textAxis path,
 .textAxis line,
-.lineAxis text {
+.lineAxis text{
     visibility: hidden
 }
-
