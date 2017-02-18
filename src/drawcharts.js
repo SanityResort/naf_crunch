@@ -102,6 +102,21 @@ let drawChart = function(ratios, splitFields) {
                 .attr('dy', '.15em')
                 .attr('transform', 'rotate(-55)');
 
+            let axisGap = 50;
+            splitFields.slice(1).forEach(function(field){
+                let ticks = tickPos.get(field);
+                console.log("field: "+ field)
+                console.log("ticks: " + JSON.stringify(ticks))
+                let range = d3.range(ticks.length).map(function(index){return ticks[index]});
+                let scale = d3.scaleOrdinal(range).domain(allLabels.get(field));
+                let axis = d3.axisBottom(scale);
+                 svg.append('g')
+                                .attr('transform', 'translate(0, '+(graphHeight+50+axisGap)+')')
+                                .call(axis)
+
+                 axisGap += 50
+            })
+
             let yRange = d3.range(5).map(function(d){return (4-d)*graphHeight/4});
             let yScale = d3.scaleOrdinal().range(yRange).domain([0,25,50,75,100]);
             let yAxis = d3.axisLeft(yScale);
