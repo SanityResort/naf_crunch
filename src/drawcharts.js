@@ -59,7 +59,7 @@ let drawChart = function(ratios, splitFields) {
 
             let tickPos = d3.map();
             splitFields.forEach(function(field){
-                tickPos.set(field, []);
+                tickPos.set(field, [0]);
             })
 
 
@@ -68,12 +68,12 @@ let drawChart = function(ratios, splitFields) {
 
             let width = populateTickPos(ratios, splitFields, tickPos, 0, allRatios, allLabels);
 
-            let finestTicks = tickPos.get(splitFields.slice(-1)[0])
-            finestTicks.unshift(0)
+            splitFields = splitFields.reverse()
+
+            let finestTicks = tickPos.get(splitFields[0])
             finestTicks.push(width)
             allLabels.push("");
             allRatios.push(createEmptyEntry())
-
 
             let labelSet = new Set()
             allLabels.forEach(function(label){
