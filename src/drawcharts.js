@@ -29,16 +29,19 @@ let createEmptyEntry = function() {
     }
 }
 
-let populateTickPos = function(ratios, splitFields, tickPos, offset){
+let populateTickPos = function(ratios, splitFields, tickPos, offset, allRatios, allLabels){
     if (splitFields.length > 0) {
         let ticks = tickPos.get(splitFields[0]);
-        console.log(JSON.stringify(ticks))
         ratios.values().forEach(function(value){
-            offset = populateTickPos(value, splitFields.slice(1), tickPos, offset) + barPadding
+            offset = populateTickPos(value, splitFields.slice(1), tickPos, offset, allRatios, allLabels) + barPadding
             ticks.push(offset)
         })
+        if (splitFields.length ==1) {
+                    ratios.keys().forEach(function(key){allLabels.push(key)});
+        }
     } else {
         offset += barPadding + barWidth
+        allRatios.push(ratios)
     }
 
     return offset;
@@ -47,8 +50,8 @@ let populateTickPos = function(ratios, splitFields, tickPos, offset){
 let drawChart = function(ratios, splitFields) {
             let values = ratios.values()
             let keys = ratios.keys()
-            values.unshift(createEmptyEntry());
-            keys.unshift('');
+  //          values.unshift(createEmptyEntry());
+    //        keys.unshift('');
 
             let tickPos = d3.map();
             splitFields.forEach(function(field){
@@ -56,24 +59,32 @@ let drawChart = function(ratios, splitFields) {
             })
 
 
+            let allRatios = [createEmptyEntry()]
+            let allLabels = [""]
 
-            let width = populateTickPos(ratios, splitFields, tickPos, 0);
+            let width = populateTickPos(ratios, splitFields, tickPos, 0, allRatios, allLabels);
 
-            console.log("width:" + width)
+            let finestTicks = tickPos.get(splitFields.slice(-1)[0])
+            finestTicks.unshift(0)
 
-            console.log(JSON.stringify(tickPos))
+            let labelSet = new Set()
+            allLabels.forEach(function(label){
+                labelSet.add(label)
+            })
+            console.log("size:" + labelSet.length)
+            console.log(JSON.stringify(labelSet))
 
             let svg = d3.select('body').append('svg').attr('width', width).attr('height', graphHeight);
 
-            svg.selectAll('rect').data(values).enter().append('rect')
+            svg.selectAll('rect').data(allRatios).enter().append('rect')
                 .attr('width', barWidth)
         	    .attr('height', function(value){return barHeight(graphHeight, value.percentage, value.games)})
-        	    .attr('y', function(value){ return barYPos(height, value.percentage, value.games) } )
-        	    .attr('x', function(value, index){return graphHeight(index, width, values.length)-barWidth/2});
+        	    .attr('y', function(value){ return barYPos(graphHeight, value.percentage, value.games) } )
+        	    .attr('x', function(value, index){return finestTicks[index]-barWidth/2});
 
 
-            let xRange = d3.range(values.length +1).map(function(index){return tickXPos(index, width, values.length)})
-            let xScale = d3.scaleOrdinal(xRange).domain(keys);
+            let xRange = d3.range(finestTicks.length).map(function(index){return finestTicks[index]})
+            let xScale = d3.scaleOrdinal(xRange).domain(allLabels);
             let xAxis = d3.axisBottom(xScale);
             svg.append('g')
                 .attr('transform', 'translate(0, '+graphHeight+')')
@@ -124,7 +135,6 @@ let draw = function() {
 
             })
 
-            console.log(JSON.stringify(ratios))
             drawChart(ratios, splitFields)
 
           });
