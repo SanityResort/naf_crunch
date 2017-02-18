@@ -32,12 +32,18 @@ let createEmptyEntry = function() {
 let populateTickPos = function(ratios, splitFields, tickPos, offset, allRatios, allLabels){
     if (splitFields.length > 0) {
         let ticks = tickPos.get(splitFields[0]);
-        ratios.values().forEach(function(value){
-            offset = populateTickPos(value, splitFields.slice(1), tickPos, offset, allRatios, allLabels) + barPadding
+        ratios.keys().sort().forEach(function(key){
+            offset = populateTickPos(ratios.get(key), splitFields.slice(1), tickPos, offset, allRatios, allLabels) + barPadding
             ticks.push(offset)
         })
         if (splitFields.length ==1) {
-                    ratios.keys().forEach(function(key){allLabels.push(key)});
+                    ratios.keys().sort().forEach(function(key){
+                        let label = key;
+                        while (allLabels.includes(label)) {
+                            label= " "+label
+                        }
+                        allLabels.push(label)
+                    });
         }
     } else {
         offset += barPadding + barWidth
@@ -50,8 +56,6 @@ let populateTickPos = function(ratios, splitFields, tickPos, offset, allRatios, 
 let drawChart = function(ratios, splitFields) {
             let values = ratios.values()
             let keys = ratios.keys()
-  //          values.unshift(createEmptyEntry());
-    //        keys.unshift('');
 
             let tickPos = d3.map();
             splitFields.forEach(function(field){
@@ -66,13 +70,15 @@ let drawChart = function(ratios, splitFields) {
 
             let finestTicks = tickPos.get(splitFields.slice(-1)[0])
             finestTicks.unshift(0)
+            finestTicks.push(width)
+            allLabels.push("");
+            allRatios.push(createEmptyEntry())
+
 
             let labelSet = new Set()
             allLabels.forEach(function(label){
                 labelSet.add(label)
             })
-            console.log("size:" + labelSet.length)
-            console.log(JSON.stringify(labelSet))
 
             let svg = d3.select('body').append('svg').attr('width', width).attr('height', graphHeight);
 
