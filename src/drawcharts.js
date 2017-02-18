@@ -36,15 +36,16 @@ let populateTickPos = function(ratios, splitFields, tickPos, offset, allRatios, 
             offset = populateTickPos(ratios.get(key), splitFields.slice(1), tickPos, offset, allRatios, allLabels) + barPadding
             ticks.push(offset)
         })
-        if (splitFields.length ==1) {
+
+        let labels = allLabels.get(splitFields[0]);
                     ratios.keys().sort().forEach(function(key){
                         let label = key;
-                        while (allLabels.includes(label)) {
+                        while (labels.includes(label)) {
                             label= " "+label
                         }
-                        allLabels.push(label)
+                        labels.push(label)
                     });
-        }
+
     } else {
         offset += barPadding + barWidth
         allRatios.push(ratios)
@@ -58,27 +59,28 @@ let drawChart = function(ratios, splitFields) {
             let keys = ratios.keys()
 
             let tickPos = d3.map();
+            let allLabels = d3.map();
             splitFields.forEach(function(field){
                 tickPos.set(field, [0]);
+                allLabels.set(field, [""])
             })
 
 
             let allRatios = [createEmptyEntry()]
-            let allLabels = [""]
 
             let width = populateTickPos(ratios, splitFields, tickPos, 0, allRatios, allLabels);
 
             splitFields = splitFields.reverse()
 
             let finestTicks = tickPos.get(splitFields[0])
+            let finestLabels = allLabels.get(splitFields[0])
             finestTicks.push(width)
-            allLabels.push("");
-            allRatios.push(createEmptyEntry())
 
-            let labelSet = new Set()
-            allLabels.forEach(function(label){
-                labelSet.add(label)
+            allLabels.values().forEach(function(labels){
+                labels.push("");
             })
+
+            allRatios.push(createEmptyEntry())
 
             let svg = d3.select('body').append('svg').attr('width', width).attr('height', graphHeight);
 
@@ -90,7 +92,7 @@ let drawChart = function(ratios, splitFields) {
 
 
             let xRange = d3.range(finestTicks.length).map(function(index){return finestTicks[index]})
-            let xScale = d3.scaleOrdinal(xRange).domain(allLabels);
+            let xScale = d3.scaleOrdinal(xRange).domain(finestLabels);
             let xAxis = d3.axisBottom(xScale);
             svg.append('g')
                 .attr('transform', 'translate(0, '+graphHeight+')')
