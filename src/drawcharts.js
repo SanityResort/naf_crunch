@@ -50,7 +50,7 @@ let populateTickPos = function(ratios, splitFields, tickPos, offset, allRatios, 
                     ratios.keys().sort().forEach(function(key){
                         let label = key;
                         while (labels.includes(label)) {
-                            label= " "+label
+                            label= ' '+label
                         }
                         labels.push(label)
                     });
@@ -71,7 +71,7 @@ let drawChart = function(ratios, splitFields) {
             let allLabels = d3.map();
             splitFields.forEach(function(field){
                 tickPos.set(field, [0]);
-                allLabels.set(field, [""])
+                allLabels.set(field, [''])
             })
 
 
@@ -86,7 +86,7 @@ let drawChart = function(ratios, splitFields) {
             finestTicks.push(width)
 
             allLabels.values().forEach(function(labels){
-                labels.push("");
+                labels.push('');
             })
 
             allRatios.push(createEmptyEntry())
@@ -97,7 +97,8 @@ let drawChart = function(ratios, splitFields) {
                 .attr('width', barWidth)
         	    .attr('height', function(value){return barHeight(graphHeight, value.percentage, value.games)})
         	    .attr('y', function(value){ return barYPos(graphHeight, value.percentage, value.games) } )
-        	    .attr('x', function(value, index){return finestTicks[index]-barWidth/2});
+        	    .attr('x', function(value, index){return finestTicks[index]-barWidth/2})
+        	    .append('svg:title').html(createToolTip)
 
 
             let xRange = d3.range(finestTicks.length).map(function(index){return finestTicks[index]})
@@ -146,6 +147,10 @@ let drawChart = function(ratios, splitFields) {
             svg.append('g').call(yAxis);
 }
 
+let createToolTip = function(ratio) {
+    return '<p>W: '+ratio.wins+'</p><br/><p>D: '+ratio.draws+'</p><br/><p>L: '+ratio.losses+'</p><br/><p>G: '+ratio.games+'</p>'
+}
+
 let createTextTicks = function(ticks) {
     let textTicks = [0]
     for (let index = 1; index<ticks.length; index++) {
@@ -166,7 +171,7 @@ let draw = function() {
           filterMap.set('race', ['Amazons', 'Norse']);
           filterMap.set('opponentrace', []);
 
-          let splitFields = ["year", "tournament", "race", "opponentrace"];
+          let splitFields = ['year', 'tournament', 'race', 'opponentrace'];
 
           let filteredData = dataset.filter(function(ratio){
 
