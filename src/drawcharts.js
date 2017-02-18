@@ -1,10 +1,10 @@
-const scaleMultiplier = 5;
+const scaleMultiplier = 7;
 const barWidth = scaleMultiplier * 2;
 const barPadding = scaleMultiplier;
 const xAxisMargin = scaleMultiplier;
 const noWinHeight = 1;
 const graphHeight = scaleMultiplier*20;
-const axisHeight = scaleMultiplier*10;
+const axisHeight = scaleMultiplier*6;
 const barGroupPadding = scaleMultiplier*6
 
 let barHeight = function(maxHeight, percentage, games) {
