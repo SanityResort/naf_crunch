@@ -91,7 +91,7 @@ let drawChart = function(ratios, splitFields) {
 
             allRatios.push(createEmptyEntry())
 
-            let svg = d3.select('body').append('svg').attr('width', width).attr('height', graphHeight);
+            let svg = d3.select('body').append('svg').attr('width', width).attr('height', graphHeight).attr('class', 'chart');
 
             svg.selectAll('g').data(allRatios).enter().append('g').append('rect')
                 .attr('width', barWidth)
