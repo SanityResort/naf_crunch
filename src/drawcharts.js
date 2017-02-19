@@ -93,12 +93,18 @@ let drawChart = function(ratios, splitFields) {
 
             let svg = d3.select('body').append('svg').attr('width', width).attr('height', graphHeight);
 
-            svg.selectAll('rect').data(allRatios).enter().append('rect')
+            svg.selectAll('g').data(allRatios).enter().append('g').append('rect')
                 .attr('width', barWidth)
         	    .attr('height', function(value){return barHeight(graphHeight, value.percentage, value.games)})
         	    .attr('y', function(value){ return barYPos(graphHeight, value.percentage, value.games) } )
         	    .attr('x', function(value, index){return finestTicks[index]-barWidth/2})
         	    .append('svg:title').html(createToolTip)
+            svg.selectAll('g').data(allRatios).insert('text')
+                .text(function(value){return value.percentage>0?Math.round(value.percentage*100):""})
+                .attr('y', function(value){ return barYPos(graphHeight, value.percentage, value.games) -2 } )
+                .attr('x', function(value, index){return finestTicks[index]-barWidth/2 + 1} )
+                .attr('font-family', 'sans-serif')
+                .attr('font-size','10px')
 
 
             let xRange = d3.range(finestTicks.length).map(function(index){return finestTicks[index]})
