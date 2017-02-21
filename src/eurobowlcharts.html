@@ -18,23 +18,124 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+    <script type="text/javascript" src="js/bootstrap-multiselect-collapsible-groups.js"></script>
+    <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>
+
 </head>
 <body>
+<select id="tournaments" class="tournaments" multiple="multiple">
+    <optgroup label="2016">
+        <option value="EuroBowl - 2016"  selected="selected">EuroBowl - 2016</option>
+       <option value="EurOpen - 2016" selected="selected">EurOpen - 2010</option>
+    </optgroup>
+    <optgroup label="2014">
+        <option value="EuroBowl - 2014" selected="selected">EuroBowl - 2014</option>
+        <option value="EurOpen - 2014" selected="selected">EurOpen - 2014</option>
+    </optgroup>
+    <optgroup label="2013">
+        <option value="EuroBowl - 2013" selected="selected">EuroBowl - 2013</option>
+        <option value="EurOpen - 2013" selected="selected">EurOpen - 2013</option>
+    </optgroup>
+    <optgroup label="2012">
+        <option value="EuroBowl - 2012" selected="selected">EuroBowl - 2012</option>
+        <option value="EurOpen - 2012" selected="selected">EurOpen - 2012</option>
+    </optgroup>
+    <optgroup label="2010">
+        <option value="EuroBowl - 2010" selected="selected">EuroBowl - 2010</option>
+        <option value="EurOpen - 2010" selected="selected">EurOpen - 2010</option>
+    </optgroup>
+    <option value="EuroBowl - 2009" selected="selected">EuroBowl - 2009</option>
+    <option value="EuroBowl - 2008" selected="selected">EuroBowl - 2008</option>
+    <option value="EuroBowl - 2006" selected="selected">EuroBowl - 2006</option>
+    <option value="EuroBowl - 2005" selected="selected">EuroBowl - 2005</option>
+    <option value="EuroBowl - 2004" selected="selected">EuroBowl - 2004</option>
+    <option value="EuroBowl - 2003" selected="selected">EuroBowl - 2003</option>
+</select>
+
+<select id="races" class="races" multiple="multiple">
+    <option value="Amazons" selected="selected">Amazons</option>
+    <option value="Chaos" selected="selected">Chaos</option>
+    <option value="Chaos Dwarves" selected="selected">Chaos Dwarves</option>
+    <option value="Chaos Pact" selected="selected">Chaos Pact</option>
+    <option value="Dark Elves" selected="selected">Dark Elves</option>
+    <option value="Dwarves" selected="selected">Dwarves</option>
+    <option value="Elves" selected="selected">Elves</option>
+    <option value="Goblins" selected="selected">Goblins</option>
+    <option value="Halflings" selected="selected">Halflings</option>
+    <option value="High Elves" selected="selected">High Elves</option>
+    <option value="Humans" selected="selected">Humans</option>
+    <option value="Khemri" selected="selected">Khemri</option>
+    <option value="Lizardmen" selected="selected">Lizardmen</option>
+    <option value="Necromantic" selected="selected">Necromantic</option>
+    <option value="Norse" selected="selected">Norse</option>
+    <option value="Nurgle's Rotters" selected="selected">Nurgle's Rotters</option>
+    <option value="Ogres" selected="selected">Ogres</option>
+    <option value="Orc" selected="selected">Orc</option>
+    <option value="Skaven" selected="selected">Skaven</option>
+    <option value="Slann" selected="selected">Slann</option>
+    <option value="Undead" selected="selected">Undead</option>
+    <option value="Underworld" selected="selected">Underworld</option>
+    <option value="Vampires" selected="selected">Vampires</option>
+    <option value="Wood Elves" selected="selected">Wood Elves</option>
+</select>
+
+<select id="opponentraces" class="opponentraces" multiple="multiple">
+    <option value="Amazons" selected="selected">Amazons</option>
+    <option value="Chaos" selected="selected">Chaos</option>
+    <option value="Chaos Dwarves" selected="selected">Chaos Dwarves</option>
+    <option value="Chaos Pact" selected="selected">Chaos Pact</option>
+    <option value="Dark Elves" selected="selected">Dark Elves</option>
+    <option value="Dwarves" selected="selected">Dwarves</option>
+    <option value="Elves" selected="selected">Elves</option>
+    <option value="Goblins" selected="selected">Goblins</option>
+    <option value="Halflings" selected="selected">Halflings</option>
+    <option value="High Elves" selected="selected">High Elves</option>
+    <option value="Humans" selected="selected">Humans</option>
+    <option value="Khemri" selected="selected">Khemri</option>
+    <option value="Lizardmen" selected="selected">Lizardmen</option>
+    <option value="Necromantic" selected="selected">Necromantic</option>
+    <option value="Norse" selected="selected">Norse</option>
+    <option value="Nurgle's Rotters" selected="selected">Nurgle's Rotters</option>
+    <option value="Ogres" selected="selected">Ogres</option>
+    <option value="Orc" selected="selected">Orc</option>
+    <option value="Skaven" selected="selected">Skaven</option>
+    <option value="Slann" selected="selected">Slann</option>
+    <option value="Undead" selected="selected">Undead</option>
+    <option value="Underworld" selected="selected">Underworld</option>
+    <option value="Vampires" selected="selected">Vampires</option>
+    <option value="Wood Elves" selected="selected">Wood Elves</option>
+</select>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#tournaments').multiselect({
+            enableClickableOptGroups: true,
+            allSelectedText: "All Tournaments"
+        });
+        $('#races').multiselect({
+            enableClickableOptGroups: true,
+            allSelectedText: "All Races"
+        })
+        $('#opponentraces').multiselect({
+            enableClickableOptGroups: true,
+            allSelectedText: "All Races"
+        })
+    });
+</script>
+
 <script>
 
-    var races = ["Amazons","Chaos","Chaos Dwarves","Chaos Pact",
-  "Dark Elves","Dwarves","Elves","Goblins","Halflings","High Elves","Humans",
-  "Khemri","Lizardmen","Necromantic","Norse","Nurgle's Rotters","Ogres","Orc",
-  "Skaven","Slann","Undead","Underworld","Vampires","Wood Elves"];
 
-    var tournaments = ["Eurobowl-","Eurobowl 2004","Eurobowl 2006", "Eur'Open Bowl",
-  "Eur'open IV","EUROBOWL 2012", "EurOpen 2012",
-  "Eurobowl 2009","Eurobowl 2013","EurOpen 2013","Eurobowl V","eurobowl 7","Eurobowl X",
-  "EuroBowl 2016","EurOpen 2016"]
-
-    var tournamentYears
-    draw();
+    //draw();
 
 </script>
 </body>
