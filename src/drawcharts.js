@@ -228,3 +228,21 @@ let mapRatio = function(ratioMap, splitFields, singleRatio) {
                     cummulativeRatio.percentage = (cummulativeRatio.wins + cummulativeRatio.draws/2)/cummulativeRatio.games;
 }
 
+let addSplitField = function(id, text) {
+                        d3.select('#selected_splitfields').append('p').attr('id', id).text(text)
+
+}
+
+let removeSplitField = function(id) {
+                    d3.select('#selected_splitfields').select('#'+id).remove()
+
+}
+
+let ChartService = function () {
+    return {
+        draw: draw,
+        addSplitField: addSplitField,
+        removeSplitField: removeSplitField
+    }
+
+}

@@ -115,8 +115,19 @@
     <option value="Wood Elves" selected="selected">Wood Elves</option>
 </select>
 
+<select id="splitfields" class="splitfields" multiple="multiple">
+    <option value="opponentrace">Opponent Race</option>
+    <option value="race">Race</option>
+    <option value="tournament">Tournament</option>
+    <option value="year">Year</option>
+</select>
+
+<div id="selected_splitfields"></div>
+
 <script type="text/javascript">
     $(document).ready(function() {
+        let chartService = ChartService();
+
         $('#tournaments').multiselect({
             enableClickableOptGroups: true,
             allSelectedText: "All Tournaments"
@@ -124,11 +135,22 @@
         $('#races').multiselect({
             enableClickableOptGroups: true,
             allSelectedText: "All Races"
-        })
+        });
         $('#opponentraces').multiselect({
             enableClickableOptGroups: true,
             allSelectedText: "All Races"
-        })
+        });
+        $('#splitfields').multiselect({
+            onChange: function(option, checked){
+                if (checked) {
+                    chartService.addSplitField($(option).attr('value'), $(option).text());
+                } else {
+                    chartService.removeSplitField($(option).attr('value'));
+                }
+            }
+        });
+        $('#splitfields').multiselect('select','race');
+        chartService.addSplitField('race', 'Race');
     });
 </script>
 
