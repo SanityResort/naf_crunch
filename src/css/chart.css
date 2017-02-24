@@ -5,6 +5,10 @@
     padding-right: 1rem;
 }
 
+.splitfield {
+    display: list-item;
+}
+
 .textAxis path,
 .textAxis line,
 .lineAxis text{

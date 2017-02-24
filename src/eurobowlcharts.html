@@ -28,6 +28,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
     <script type="text/javascript" src="js/bootstrap-multiselect-collapsible-groups.js"></script>
+    <script type="text/javascript" src="js/Sortable.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>
 
 </head>
@@ -115,16 +116,20 @@
     <option value="Wood Elves" selected="selected">Wood Elves</option>
 </select>
 
-<select id="splitfields" class="splitfields" multiple="multiple">
-    <option value="opponentrace">Opponent Race</option>
-    <option value="race">Race</option>
-    <option value="tournament">Tournament</option>
-    <option value="year">Year</option>
-</select>
+<div id="splitfields">
+    <label class="splitfield"><input type="checkbox" value="opponentrace">Opponent Race</label>
+    <label class="splitfield"><input type="checkbox" value="race" checked="checked">Race</label>
+    <label class="splitfield"><input type="checkbox" value="tournament">Tournament</label>
+    <label class="splitfield"><input type="checkbox" value="year">Year</label>
+</div>
 
-<div id="selected_splitfields"></div>
+<button id="createButton">Create graph</button>
 
 <script type="text/javascript">
+    let getValues = function(array){
+        return $.map(array, function(option, i) {return option.value})
+    }
+
     $(document).ready(function() {
         let chartService = ChartService();
 
@@ -140,17 +145,21 @@
             enableClickableOptGroups: true,
             allSelectedText: "All Races"
         });
-        $('#splitfields').multiselect({
-            onChange: function(option, checked){
-                if (checked) {
-                    chartService.addSplitField($(option).attr('value'), $(option).text());
-                } else {
-                    chartService.removeSplitField($(option).attr('value'));
-                }
-            }
-        });
-        $('#splitfields').multiselect('select','race');
-        chartService.addSplitField('race', 'Race');
+
+        let splitfields = Sortable.create(document.getElementById('splitfields'), {animation: 150})
+
+        $('#createButton').click(function() {
+           let tournaments = getValues($('#tournaments option:selected'))
+           let races = getValues($('#races option:selected'))
+           let opponentRaces = getValues($('#opponentraces option:selected'))
+           let splitfields = getValues($('#splitfields input:checked'))
+
+           console.log(JSON.stringify(tournaments))
+           console.log(JSON.stringify(races))
+           console.log(JSON.stringify(opponentRaces))
+           console.log(JSON.stringify(splitfields))
+        })
+
     });
 </script>
 
