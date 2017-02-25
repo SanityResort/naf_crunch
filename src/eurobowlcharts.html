@@ -125,7 +125,7 @@
 
 <button id="createButton">Create graph</button>
 
-<div id="svgcontainer"></div>
+<div id="svgparent"></div>
 
 <script type="text/javascript">
     let getValues = function(array){
@@ -148,7 +148,8 @@
             allSelectedText: "All Races"
         });
 
-        let splitfields = Sortable.create(document.getElementById('splitfields'), {animation: 150})
+        Sortable.create(document.getElementById('splitfields'), {animation: 150})
+        Sortable.create(document.getElementById('svgparent'), {animation: 500})
 
         $('#createButton').click(function() {
            let tournaments = getValues($('#tournaments option:selected'))
@@ -157,12 +158,10 @@
            let splitfields = getValues($('#splitfields input:checked'))
            let splitfieldNames = $.map($('#splitfields input:checked'), function(option, i) {return $(option).parent().text()})
 
-           console.log(JSON.stringify(tournaments))
-           console.log(JSON.stringify(races))
-           console.log(JSON.stringify(opponentRaces))
-           console.log(JSON.stringify(splitfields))
-           console.log(JSON.stringify(splitfieldNames))
-           chartService.draw(tournaments, races, opponentRaces, splitfields, splitfieldNames, 'svgcontainer')
+            let existingSvgs = $('.svgcontainer').length;
+            let newId = 'svgcontainer-'+(existingSvgs+1);
+            d3.select('#svgparent').append('div').attr('id',newId).attr('class','svgcontainer')
+           chartService.draw(tournaments, races, opponentRaces, splitfields, splitfieldNames, newId)
         })
 
     });

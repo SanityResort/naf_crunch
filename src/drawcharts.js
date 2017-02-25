@@ -71,7 +71,6 @@ let populateTickPos = function(ratios, splitFields, tickPos, offset, allRatios, 
 }
 
 let drawChart = function(ratios, splitFields, parent) {
-console.log("drawing")
             let values = ratios.values()
             let keys = ratios.keys()
 
@@ -217,9 +216,7 @@ let draw = function(tournaments, races, opponentRaces, splitFields, splitfieldNa
             })
 
             splitFields.reverse()
-            console.log("draw")
             drawChart(ratios, splitFields, parent)
-console.log("draw done")
           });
 }
 
