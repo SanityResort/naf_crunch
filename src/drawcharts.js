@@ -1,5 +1,5 @@
 const scaleMultiplier = 7;
-const barWidth = scaleMultiplier * 2;
+const barWidth = scaleMultiplier * 3;
 const barPadding = scaleMultiplier;
 const xAxisMargin = scaleMultiplier;
 const noWinHeight = 1;
@@ -104,7 +104,7 @@ let drawChart = function(ratios, splitFields, parent) {
             svg.selectAll('g').data(allRatios).insert('text')
                 .text(function(value){return value.percentage>0?Math.round(value.percentage*100):""})
                 .attr('y', function(value){ return barYPos(graphHeight, value.percentage, value.games) -2 } )
-                .attr('x', function(value, index){return finestTicks[index]-barWidth/2 + 1} )
+                .attr('x', function(value, index){return finestTicks[index]-barWidth/(value.percentage==1?2:4)} )
                 .attr('font-family', 'sans-serif')
                 .attr('font-size','10px')
 
