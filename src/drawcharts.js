@@ -92,7 +92,7 @@ let drawChart = function(ratios, splitFields, parent) {
 
             allRatios.push(createEmptyEntry())
 
-            let wrapper = d3.select('#'+parent).append('svg').attr('width', width + margin.left + margin.right).attr('height', graphHeight + margin.top + margin.bottom);
+            let wrapper = d3.select('#'+parent).append('svg').attr('width', width + margin.left + margin.right).attr('height', graphHeight + margin.top + margin.bottom * splitFields.length);
             let svg = wrapper.append('g').attr('class', 'chart').attr('transform', 'translate('+margin.left+','+margin.top+')');
 
             svg.selectAll('g').data(allRatios).enter().append('g').append('rect')
@@ -193,19 +193,19 @@ let draw = function(tournaments, races, opponentRaces, splitFields, parent) {
 
             let ratios = d3.map();
 
+            splitFields.reverse()
             filteredData.forEach(function(singleRatio){
-
                 mapRatio(ratios, splitFields, singleRatio);
 
             })
 
+            splitFields.reverse()
             drawChart(ratios, splitFields, parent)
 
           });
 }
 
 let mapRatio = function(ratioMap, splitFields, singleRatio) {
-
                     let key = splitFields[0];
                     let value = singleRatio[key];
 
@@ -219,6 +219,7 @@ let mapRatio = function(ratioMap, splitFields, singleRatio) {
                     if (!ratioMap.has(value)) {
                         ratioMap.set(value, {'games':0, 'wins':0, 'draws':0, 'losses':0})
                     }
+
                     let cummulativeRatio = ratioMap.get(value)
                     cummulativeRatio.games += +singleRatio.games
                     cummulativeRatio.wins += +singleRatio.wins
