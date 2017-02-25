@@ -9,11 +9,10 @@ const barGroupPadding = scaleMultiplier*6
 const margin = {left: scaleMultiplier*5, top: scaleMultiplier*2, right: scaleMultiplier*2}
 const rotatedAxisPadding = scaleMultiplier*11
 const axisPadding = scaleMultiplier*6
-const headingPadding = scaleMultiplier*13
 const tournamentMax = 16;
 const racesMax = 24;
 const headingFontSize = scaleMultiplier*2;
-const headingSpacing = scaleMultiplier;
+const headingSpacing = scaleMultiplier/2;
 
 let barHeight = function(maxHeight, percentage, games) {
     if (percentage>0) {
@@ -71,7 +70,7 @@ let populateTickPos = function(ratios, splitFields, tickPos, offset, allRatios, 
     return offset;
 }
 
-let drawChart = function(ratios, splitFields, parent, headingLabels) {
+let drawChart = function(ratios, splitFields, parent) {
 console.log("drawing")
             let values = ratios.values()
             let keys = ratios.keys()
@@ -100,15 +99,8 @@ console.log("drawing")
 
             allRatios.push(createEmptyEntry())
 
-            let wrapper = d3.select('#'+parent).append('svg').attr('width', width + margin.left + margin.right).attr('height', graphHeight + margin.top + axisPadding * (splitFields.length-1) +rotatedAxisPadding  + headingPadding).attr('overflow','wrap');
-            let svg = wrapper.append('g').attr('class', 'chart').attr('transform', 'translate('+margin.left+','+ (margin.top + headingPadding) +')');
-
-            let heading = wrapper.append('text').attr('font-size', headingFontSize+'px').attr('transform', 'translate('+headingSpacing+','+headingSpacing+')')
-            headingLabels.forEach(function(headingLabel, index){
-                heading.append('tspan').text(headingLabel).attr('x','0px').attr('dy',(headingFontSize+headingSpacing)+'px').attr('font-weight', 'bold')
-
-            })
-
+            let wrapper = d3.select('#'+parent).append('svg').attr('width', width + margin.left + margin.right).attr('height', graphHeight + margin.top + axisPadding * (splitFields.length-1) +rotatedAxisPadding ).attr('overflow','wrap');
+            let svg = wrapper.append('g').attr('class', 'chart').attr('transform', 'translate('+margin.left+','+ margin.top  +')');
 
             svg.selectAll('g').data(allRatios).enter().append('g').append('rect')
                 .attr('width', barWidth)
@@ -212,6 +204,10 @@ let draw = function(tournaments, races, opponentRaces, splitFields, splitfieldNa
            headingLabels.push("Opponent Races: " + (opponentRaces.length == racesMax ? "All" : opponentRaces.join(', ')))
            headingLabels.push("Split On: " + splitfieldNames.join(', '))
 
+            headingLabels.forEach(function(headingLabel){
+                d3.select('#'+parent).append('p').attr('font-size', headingFontSize+'px').style('font-weight','bold').style('margin',headingSpacing+'px').text(headingLabel)
+            })
+
             let ratios = d3.map();
 
             splitFields.reverse()
@@ -222,7 +218,7 @@ let draw = function(tournaments, races, opponentRaces, splitFields, splitfieldNa
 
             splitFields.reverse()
             console.log("draw")
-            drawChart(ratios, splitFields, parent, headingLabels)
+            drawChart(ratios, splitFields, parent)
 console.log("draw done")
           });
 }
