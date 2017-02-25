@@ -153,11 +153,13 @@
            let races = getValues($('#races option:selected'))
            let opponentRaces = getValues($('#opponentraces option:selected'))
            let splitfields = getValues($('#splitfields input:checked'))
+           let splitfieldNames = $.map($('#splitfields input:checked'), function(option, i) {return $(option).parent().text()})
 
            console.log(JSON.stringify(tournaments))
            console.log(JSON.stringify(races))
            console.log(JSON.stringify(opponentRaces))
            console.log(JSON.stringify(splitfields))
+           console.log(JSON.stringify(splitfieldNames))
         })
 
     });
