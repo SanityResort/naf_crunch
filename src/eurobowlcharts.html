@@ -125,6 +125,8 @@
 
 <button id="createButton">Create graph</button>
 
+<div id="svgcontainer"></div>
+
 <script type="text/javascript">
     let getValues = function(array){
         return $.map(array, function(option, i) {return option.value})
@@ -160,16 +162,11 @@
            console.log(JSON.stringify(opponentRaces))
            console.log(JSON.stringify(splitfields))
            console.log(JSON.stringify(splitfieldNames))
+           chartService.draw(tournaments, races, opponentRaces, splitfields, 'svgcontainer')
         })
 
     });
 </script>
 
-<script>
-
-
-    //draw();
-
-</script>
 </body>
 </html>

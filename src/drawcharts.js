@@ -6,6 +6,7 @@ const noWinHeight = 1;
 const graphHeight = scaleMultiplier*20;
 const axisHeight = scaleMultiplier*6;
 const barGroupPadding = scaleMultiplier*6
+const margin = {left: scaleMultiplier*5, top: scaleMultiplier*2, right: scaleMultiplier*2, bottom: scaleMultiplier*12}
 
 let barHeight = function(maxHeight, percentage, games) {
     if (percentage>0) {
@@ -63,7 +64,7 @@ let populateTickPos = function(ratios, splitFields, tickPos, offset, allRatios, 
     return offset;
 }
 
-let drawChart = function(ratios, splitFields) {
+let drawChart = function(ratios, splitFields, parent) {
             let values = ratios.values()
             let keys = ratios.keys()
 
@@ -83,7 +84,7 @@ let drawChart = function(ratios, splitFields) {
 
             let finestTicks = tickPos.get(splitFields[0])
             let finestLabels = allLabels.get(splitFields[0])
-            finestTicks.push(width)
+            finestTicks.push(width+barWidth)
 
             allLabels.values().forEach(function(labels){
                 labels.push('');
@@ -91,7 +92,8 @@ let drawChart = function(ratios, splitFields) {
 
             allRatios.push(createEmptyEntry())
 
-            let svg = d3.select('body').append('svg').attr('width', width).attr('height', graphHeight).attr('class', 'chart');
+            let wrapper = d3.select('#'+parent).append('svg').attr('width', width + margin.left + margin.right).attr('height', graphHeight + margin.top + margin.bottom);
+            let svg = wrapper.append('g').attr('class', 'chart').attr('transform', 'translate('+margin.left+','+margin.top+')');
 
             svg.selectAll('g').data(allRatios).enter().append('g').append('rect')
                 .attr('width', barWidth)
@@ -150,7 +152,7 @@ let drawChart = function(ratios, splitFields) {
             let yRange = d3.range(5).map(function(d){return (4-d)*graphHeight/4});
             let yScale = d3.scaleOrdinal().range(yRange).domain([0,25,50,75,100]);
             let yAxis = d3.axisLeft(yScale);
-            svg.append('g').call(yAxis);
+            svg.append('g').attr('transform', 'translate(0,0)').call(yAxis);
 }
 
 let createToolTip = function(ratio) {
@@ -166,18 +168,15 @@ let createTextTicks = function(ticks) {
     return textTicks;
 }
 
-let draw = function() {
+let draw = function(tournaments, races, opponentRaces, splitFields, parent) {
   let dataset;
   d3.csv('eurogames.csv', function(data) {
           dataset = data
 
           let filterMap = d3.map();
-          filterMap.set('year', undefined);
-          filterMap.set('tournament', ['EuroBowl - 2003', 'EuroBowl - 2006']);
-          filterMap.set('race', ['Amazons', 'Norse']);
-          filterMap.set('opponentrace', []);
-
-          let splitFields = ['year', 'tournament', 'race', 'opponentrace'];
+          filterMap.set('tournament', tournaments);
+          filterMap.set('race', races);
+          filterMap.set('opponentrace', opponentRaces);
 
           let filteredData = dataset.filter(function(ratio){
 
@@ -200,7 +199,7 @@ let draw = function() {
 
             })
 
-            drawChart(ratios, splitFields)
+            drawChart(ratios, splitFields, parent)
 
           });
 }
@@ -228,21 +227,9 @@ let mapRatio = function(ratioMap, splitFields, singleRatio) {
                     cummulativeRatio.percentage = (cummulativeRatio.wins + cummulativeRatio.draws/2)/cummulativeRatio.games;
 }
 
-let addSplitField = function(id, text) {
-                        d3.select('#selected_splitfields').append('p').attr('id', id).text(text)
-
-}
-
-let removeSplitField = function(id) {
-                    d3.select('#selected_splitfields').select('#'+id).remove()
-
-}
-
 let ChartService = function () {
     return {
-        draw: draw,
-        addSplitField: addSplitField,
-        removeSplitField: removeSplitField
+        draw: draw
     }
 
 }
