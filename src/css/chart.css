@@ -1,14 +1,25 @@
-#panel {
-    height: auto;
+.controlPanel {
+    height: 170px;
+}
+
+.panelFooter, .panelHeader {
+    height: 10px;
+}
+
+#panelWrapper {
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+}
+
+#controlPanel {
     left: 1px;
-  /*  position: absolute;*/
     right: 1px;
     top: 1px;
 }
 
-#panelHeader, #panelFooter, #dummy {
+#panelFooter, #panelHeader {
     background-color: #555;
-    height: 10px;
     width: 100%;
     display: block;
 
@@ -29,7 +40,7 @@
     position: absolute;
     right: 1px;
     top: 1px;
-    z-index: 1;
+    z-index: 2;
 }
 
 .splitfield {
