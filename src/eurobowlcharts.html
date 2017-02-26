@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Eurobowl Charts</title>
     <link rel="stylesheet" href="css/chart.css"/>
-    <script src="d3.v4.js"></script>
-    <script src="drawcharts.js"></script>
+    <script src="js/d3.v4.js"></script>
+    <script src="js/drawcharts.js"></script>
 
     <!-- Bootstrap -->
 
@@ -29,6 +29,7 @@
     <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
     <script type="text/javascript" src="js/bootstrap-multiselect-collapsible-groups.js"></script>
     <script type="text/javascript" src="js/Sortable.min.js"></script>
+    <script type="text/javascript" src="js/jquery.scrollintoview.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>
 
 </head>
@@ -158,9 +159,10 @@
            let splitfields = getValues($('#splitfields input:checked'))
            let splitfieldNames = $.map($('#splitfields input:checked'), function(option, i) {return $(option).parent().text()})
 
-            let existingSvgs = $('.svgcontainer').length;
-            let newId = 'svgcontainer-'+(existingSvgs+1);
-            d3.select('#svgparent').append('div').attr('id',newId).attr('class','svgcontainer')
+           let existingSvgs = $('.svgcontainer').length;
+           let newId = 'svgcontainer-'+(existingSvgs+1);
+           d3.select('#svgparent').append('div').attr('id',newId).attr('class','svgcontainer')
+           d3.select('body').append('div').attr('class', 'spinner')
            chartService.draw(tournaments, races, opponentRaces, splitfields, splitfieldNames, newId)
         })
 

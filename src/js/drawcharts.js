@@ -98,7 +98,13 @@ let drawChart = function(ratios, splitFields, parent) {
 
             allRatios.push(createEmptyEntry())
 
-            let wrapper = d3.select('#'+parent).append('svg').attr('width', width + margin.left + margin.right).attr('height', graphHeight + margin.top + axisPadding * (splitFields.length-1) +rotatedAxisPadding ).attr('overflow','wrap');
+            let wrapper = d3.select('#'+parent).append('svg').attr('width', width + margin.left + margin.right)
+            .attr('height', graphHeight + margin.top + axisPadding * (splitFields.length-1) +rotatedAxisPadding )
+            .attr('overflow','wrap')
+            .attr('onload', function(){
+                d3.selectAll('.spinner').remove();
+                $('#'+parent).scrollintoview({duration:1000});
+            });
             let svg = wrapper.append('g').attr('class', 'chart').attr('transform', 'translate('+margin.left+','+ margin.top  +')');
 
             svg.selectAll('g').data(allRatios).enter().append('g').append('rect')
