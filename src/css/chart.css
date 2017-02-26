@@ -1,15 +1,10 @@
+#content {
+    margin: auto;
+    width: 98%;
+}
+
 .controlPanel {
     height: 170px;
-}
-
-.panelFooter, .panelHeader {
-    height: 10px;
-}
-
-#panelWrapper {
-    position: fixed;
-    width: 100%;
-    z-index: 1;
 }
 
 #controlPanel {
@@ -18,33 +13,52 @@
     top: 1px;
 }
 
+li {
+}
+
+.panelFooter, .panelHeader {
+    height: 10px;
+}
+
+#panelWrapper {
+    background-color: #eee;
+    position: fixed;
+    width: 98%;
+    z-index: 1;
+}
+
 #panelFooter, #panelHeader {
-    background-color: #555;
-    width: 100%;
     display: block;
 
 }
 
 .spinner {
     background-color: #888;
-    background-image: url(../img/spinner.gif);
-    background-position: center center;
-    background-repeat: no-repeat;
+    //background-image: url(../img/spinner.gif);
+    //background-position: center center;
+    //background-repeat: no-repeat;
     border-color: #222;
     border-radius: 20px;
     border-style: solid;
     border-width: 3px;
     bottom: 1px;
+    color: #eee;
     left: 1px;
     opacity: .7;
-    position: absolute;
+    position: fixed;
     right: 1px;
+    text-align: center;
     top: 1px;
     z-index: 2;
 }
 
+.spinnerText {
+    margin: auto;
+}
+
 .splitfield {
-    display: list-item;
+    display: block;
+
 }
 
 .textAxis path,

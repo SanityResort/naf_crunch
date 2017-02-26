@@ -38,6 +38,7 @@
 
 </head>
 <body>
+<div id="content">
 <div id="panelWrapper">
 
     <div id="panelHeader" class="collapser panelHeader"></div>
@@ -194,16 +195,17 @@
            let splitfields = getValues($('#splitfields input:checked'))
            let splitfieldNames = $.map($('#splitfields input:checked'), function(option, i) {return $(option).parent().text()})
 
+           d3.select('body').append('div').attr('class', 'spinner').append('div').attr('class','spinnerText').text('Calculating...')
            let existingSvgs = $('.svgcontainer').length;
            let newId = 'svgcontainer-'+(existingSvgs+1);
            d3.select('#svgparent').append('div').attr('id',newId).attr('class','svgcontainer').attr('display', 'inline-block')
-           d3.select('body').append('div').attr('class', 'spinner')
            chartService.draw(tournaments, races, opponentRaces, splitfields, splitfieldNames, newId)
         })
 
     });
 
 </script>
+</div>
 
 </body>
 </html>
