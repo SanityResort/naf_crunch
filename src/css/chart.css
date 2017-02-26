@@ -1,9 +1,17 @@
 #panel {
     height: auto;
     left: 1px;
-    position: absolute;
+  /*  position: absolute;*/
     right: 1px;
     top: 1px;
+}
+
+#panelHeader, #panelFooter, #dummy {
+    background-color: #555;
+    height: 10px;
+    width: 100%;
+    display: block;
+
 }
 
 .spinner {
