@@ -34,9 +34,6 @@ li {
 
 .spinner {
     background-color: #888;
-    //background-image: url(../img/spinner.gif);
-    //background-position: center center;
-    //background-repeat: no-repeat;
     border-color: #222;
     border-radius: 20px;
     border-style: solid;
@@ -53,7 +50,12 @@ li {
 }
 
 .spinnerText {
-    margin: auto;
+    font-size: 2em;
+    font-family: Verdana, Helvetica, sans-serif;
+    font-weight: bold;
+    left: 45%;
+    position: fixed;
+    top: 45%;
 }
 
 .splitfield {
