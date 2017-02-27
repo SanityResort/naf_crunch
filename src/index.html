@@ -39,10 +39,17 @@
 </head>
 <body>
 <div id="content">
-<div id="panelWrapper">
+    <div class="alert alert-danger collapse" role="alert" id="alert" aria-expanded="false">
+        <button type="button" class="close" id="alertButton" aria-label="Close">
+            <span>&times;</span>
+        </button>
+        <strong>Error: </strong>You must select at least one tournament, race and opponent race.
+    </div>
+
+    <div id="panelWrapper">
 
     <div id="panelHeader" class="collapser panelHeader"></div>
-    <table>
+    <table id="panelTable">
     <tr id="controlPanel"  aria-expanded="true" class="controlPanel collapse in">
         <td id="filter">
         <select id="tournaments" class="tournaments" multiple="multiple">
@@ -193,6 +200,11 @@
             $('.controlPanel').collapse('toggle')
         })
 
+        $('#alertButton').click(function(){
+            console.log('collapse')
+            $('#alert').collapse('toggle');
+        })
+
         $('#createButton').click(function() {
            let tournaments = getValues($('#tournaments option:selected'))
            let races = getValues($('#races option:selected'))
@@ -200,12 +212,17 @@
            let splitfields = getValues($('#splitfields input:checked'))
            let splitfieldNames = $.map($('#splitfields input:checked'), function(option, i) {return $(option).parent().text()})
 
+            if (tournaments.length == 0 || races.length == 0 || opponentRaces.length == 0) {
+                $('#alert').collapse('toggle');
+            } else {
+
            d3.select('body').append('div').attr('class', 'spinner').append('div').attr('class','spinnerText').text('Calculating...')
            let existingSvgs = $('.svgcontainer').length;
            let newId = 'svgcontainer-'+(existingSvgs+1);
            d3.select('#svgparent').append('div').attr('id',newId).attr('class','svgcontainer').attr('display', 'inline-block')
            d3.select('#svgparent').append('a').attr('id', 'a-'+newId)
            chartService.draw(tournaments, races, opponentRaces, splitfields, splitfieldNames, newId)
+           }
         })
 
     });
