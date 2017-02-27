@@ -162,9 +162,10 @@
     </div>
     <div id="hiddenPanelFooter" class="panelFooter"></div>
 </div>
+
 <div id="svgparent"></div>
 
-<script type="text/javascript">
+    <script type="text/javascript">
     let getValues = function(array){
         return $.map(array, function(option, i) {return option.value})
     }
@@ -203,6 +204,7 @@
            let existingSvgs = $('.svgcontainer').length;
            let newId = 'svgcontainer-'+(existingSvgs+1);
            d3.select('#svgparent').append('div').attr('id',newId).attr('class','svgcontainer').attr('display', 'inline-block')
+           d3.select('#svgparent').append('a').attr('id', 'a-'+newId)
            chartService.draw(tournaments, races, opponentRaces, splitfields, splitfieldNames, newId)
         })
 
@@ -210,6 +212,16 @@
 
 </script>
 </div>
+
+
+<svg id="svgdef" height="0" width="0"  version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="gradient"  x1="0" x2="0" y1="0" y2="1">
+            <stop stop-color="yellow" offset="0%"/>
+            <stop stop-color="#880" offset="100%"/>
+        </linearGradient>
+    </defs>
+</svg>
 
 </body>
 </html>

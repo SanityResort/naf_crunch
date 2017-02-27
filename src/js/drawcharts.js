@@ -103,7 +103,7 @@ let drawChart = function(ratios, splitFields, parent) {
             .attr('overflow','wrap')
             .attr('onload', function(){
                 d3.selectAll('.spinner').remove();
-                $('#'+parent).scrollintoview({duration:1000});
+                $('#a-'+parent).scrollintoview({duration:1000});
             });
             let svg = wrapper.append('g').attr('class', 'chart').attr('transform', 'translate('+margin.left+','+ margin.top  +')');
 
@@ -112,6 +112,7 @@ let drawChart = function(ratios, splitFields, parent) {
         	    .attr('height', function(value){return barHeight(graphHeight, value.percentage, value.games)})
         	    .attr('y', function(value){ return barYPos(graphHeight, value.percentage, value.games) } )
         	    .attr('x', function(value, index){return finestTicks[index]-barWidth/2})
+        	    .attr('class', 'bar')
         	    .append('svg:title').html(createToolTip)
             svg.selectAll('g').data(allRatios).insert('text')
                 .text(function(value){return value.percentage>0?Math.round(value.percentage*100):""})

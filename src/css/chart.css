@@ -1,3 +1,10 @@
+.bar {
+    fill: url(#gradient);
+    stroke: black;
+    rx: 5px;
+    ry: 5px;
+}
+
 #content {
     margin: auto;
     width: 98%;
@@ -88,6 +95,16 @@
 .splitfield {
     display: block;
 
+}
+
+.svgcontainer {
+    background-color: #f0f0ff;
+    border: 5px ridge;
+    border-radius: 15px;
+    margin: 15px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    padding: 5px;
 }
 
 .textAxis path,
