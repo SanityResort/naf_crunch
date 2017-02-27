@@ -42,7 +42,9 @@
 <div id="panelWrapper">
 
     <div id="panelHeader" class="collapser panelHeader"></div>
-    <div id="controlPanel"  aria-expanded="true" class="controlPanel collapse in">
+    <table>
+    <tr id="controlPanel"  aria-expanded="true" class="controlPanel collapse in">
+        <td id="filter">
         <select id="tournaments" class="tournaments" multiple="multiple">
             <optgroup label="2016">
                 <option value="EuroBowl - 2016" selected="selected">EuroBowl - 2016</option>
@@ -137,17 +139,19 @@
             <option value="Vampires" selected="selected">Vampires</option>
             <option value="Wood Elves" selected="selected">Wood Elves</option>
         </select>
-
-        <div id="splitfields">
+        </td>
+        <td id="splitfields">
             <label class="splitfield"><input type="checkbox" value="opponentrace">Opponent Race</label>
             <label class="splitfield"><input type="checkbox" value="race" checked="checked">Race</label>
             <label class="splitfield"><input type="checkbox" value="tournament">Tournament</label>
             <label class="splitfield"><input type="checkbox" value="year">Year</label>
-        </div>
-
-        <button id="createButton">Create graph</button>
-        <button id="collpaseButton" class="collapser">Hide panel</button>
-    </div>
+        </td>
+        <td id="buttons">
+            <button id="createButton">Create graph</button>
+            <button id="collpaseButton" class="collapser">Hide panel</button>
+        </td>
+    </tr>
+    </table>
     <div id="panelFooter" class="collapser panelFooter"></div>
 </div>
 
