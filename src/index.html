@@ -43,7 +43,7 @@
         <button type="button" class="close" id="alertButton" aria-label="Close">
             <span>&times;</span>
         </button>
-        <strong>Error: </strong>You must select at least one tournament, race and opponent race.
+        <strong>Error: </strong>You must select at least one tournament, race, opponent race and one field to split the data on.
     </div>
 
     <div id="panelWrapper">
@@ -169,7 +169,7 @@
     </div>
     <div id="hiddenPanelFooter" class="panelFooter"></div>
 </div>
-
+<div id="tooltip"></div>
 <div id="svgparent"></div>
 
     <script type="text/javascript">
@@ -182,15 +182,21 @@
 
         $('#tournaments').multiselect({
             enableClickableOptGroups: true,
-            allSelectedText: "All Tournaments"
+            allSelectedText: "All Tournaments",
+            maxHeight: 200,
+            includeSelectAllOption: true
         });
         $('#races').multiselect({
             enableClickableOptGroups: true,
-            allSelectedText: "All Races"
+            allSelectedText: "All Races",
+            maxHeight: 200,
+            includeSelectAllOption: true
         });
         $('#opponentraces').multiselect({
             enableClickableOptGroups: true,
-            allSelectedText: "All Races"
+            allSelectedText: "All Races",
+            maxHeight: 200,
+            includeSelectAllOption: true
         });
 
         Sortable.create(document.getElementById('splitfields'), {animation: 150})
@@ -212,7 +218,7 @@
            let splitfields = getValues($('#splitfields input:checked'))
            let splitfieldNames = $.map($('#splitfields input:checked'), function(option, i) {return $(option).parent().text()})
 
-            if (tournaments.length == 0 || races.length == 0 || opponentRaces.length == 0) {
+            if (tournaments.length == 0 || races.length == 0 || opponentRaces.length == 0 || splitfields.length == 0 ) {
                 $('#alert').collapse('toggle');
             } else {
 

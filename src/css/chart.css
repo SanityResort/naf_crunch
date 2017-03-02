@@ -128,3 +128,14 @@
 .lineAxis text{
     visibility: hidden
 }
+
+#tooltip {
+    background: black;
+    border: 2px ridge;
+    border-radius: 12px;
+    color: white;
+    opacity: 0;
+    padding: 8px;
+    position: absolute;
+    width: auto;
+}

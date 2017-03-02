@@ -71,6 +71,7 @@ let populateTickPos = function(ratios, splitFields, tickPos, offset, allRatios, 
 }
 
 let drawChart = function(ratios, splitFields, parent) {
+
             let values = ratios.values()
             let keys = ratios.keys()
 
@@ -97,7 +98,6 @@ let drawChart = function(ratios, splitFields, parent) {
             })
 
             allRatios.push(createEmptyEntry())
-
             let wrapper = d3.select('#'+parent).append('svg').attr('width', width + margin.left + margin.right)
             .attr('height', graphHeight + margin.top + axisPadding * (splitFields.length-1) +rotatedAxisPadding )
             .attr('overflow','wrap')
@@ -106,6 +106,7 @@ let drawChart = function(ratios, splitFields, parent) {
                 $('#a-'+parent).scrollintoview({duration:1000});
             });
             let svg = wrapper.append('g').attr('class', 'chart').attr('transform', 'translate('+margin.left+','+ margin.top  +')');
+            let tooltip= d3.select('#tooltip');
 
             svg.selectAll('g').data(allRatios).enter().append('g').append('rect')
                 .attr('width', barWidth)
@@ -113,14 +114,27 @@ let drawChart = function(ratios, splitFields, parent) {
         	    .attr('y', function(value){ return barYPos(graphHeight, value.percentage, value.games) } )
         	    .attr('x', function(value, index){return finestTicks[index]-barWidth/2})
         	    .attr('class', 'bar')
-        	    .append('svg:title').html(createToolTip)
+                .on("mouseover", function(value, index) {
+                            tooltip.html(createToolTip(value))
+                                .style("left",  (d3.event.pageX) + "px")
+                                .style("top",   (d3.event.pageY) + "px");
+                            tooltip.transition()
+                                .duration(200)
+                                .style("opacity", .8);
+
+                            })
+                        .on("mouseout", function(d) {
+                            tooltip.transition()
+                                .duration(500)
+                                .style("opacity", 0);
+                        })
+
             svg.selectAll('g').data(allRatios).insert('text')
                 .text(function(value){return value.percentage>0?Math.round(value.percentage*100):""})
                 .attr('y', function(value){ return barYPos(graphHeight, value.percentage, value.games) -2 } )
                 .attr('x', function(value, index){return finestTicks[index]-barWidth/(value.percentage==1?2:4)} )
                 .attr('font-family', 'sans-serif')
                 .attr('font-size','10px')
-
 
             let xRange = d3.range(finestTicks.length).map(function(index){return finestTicks[index]})
             let xScale = d3.scaleOrdinal(xRange).domain(finestLabels);
@@ -169,7 +183,7 @@ let drawChart = function(ratios, splitFields, parent) {
 }
 
 let createToolTip = function(ratio) {
-    return '<p>W: '+ratio.wins+'</p><br/><p>D: '+ratio.draws+'</p><br/><p>L: '+ratio.losses+'</p><br/><p>G: '+ratio.games+'</p>'
+    return 'Wins: '+ratio.wins+'<br/>Draws: '+ratio.draws+'<br/>Losses: '+ratio.losses+'<br/>Games: '+ratio.games
 }
 
 let createTextTicks = function(ticks) {
@@ -210,8 +224,10 @@ let draw = function(tournaments, races, opponentRaces, splitFields, splitfieldNa
            headingLabels.push("Opponent Races: " + (opponentRaces.length == racesMax ? "All" : opponentRaces.join(', ')))
            headingLabels.push("Split On: " + splitfieldNames.join(', '))
 
-            headingLabels.forEach(function(headingLabel){
-                d3.select('#'+parent).append('p').attr('font-size', headingFontSize+'px').style('font-weight','bold').style('margin',headingSpacing+'px').text(headingLabel)
+            headingLabels.forEach(function(headingLabel, index){
+            console.log(index)
+                d3.select('#'+parent).append('p').attr('font-size', headingFontSize+'px')
+                .style('font-weight','bold').style('margin',headingSpacing+'px').text(headingLabel)
             })
 
             let ratios = d3.map();
