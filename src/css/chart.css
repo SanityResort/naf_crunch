@@ -34,15 +34,30 @@
     width: 100%;
 }
 
-
-#filter, #splitfields {
-
+td {
+    width: 33%;
 }
 
-#buttons, #splitfields, #filter {
-    padding: 5px;
+.select-container {
+    display: block;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
 }
 
+button {
+    display: inline-block;
+}
+
+#field-wrapper {
+    display: table-cell;
+    padding-left: 15px;
+    vertical-align: middle;
+}
+
+.splitfield:first-child {
+    padding-top: 15px;
+}
 
 .panelFooter, .panelHeader {
     height: 10px;
@@ -111,6 +126,31 @@
 .splitfield {
     display: block;
 
+}
+
+.headline {
+    text-align: center;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.img-desc {
+   font-weight: bolder;
+   color: #08a;
+   font-size: 20px;
+}
+
+#image-wrapper {
+    display: table-cell;
+    float: left;
+    padding-left: 20%;
+    text-align: center;
+}
+
+#splitfields-image {
+    //display: table-cell;
+    height: 80px;
+   // float: left;
 }
 
 .svgcontainer {
