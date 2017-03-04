@@ -13,6 +13,10 @@
     ry: 5px;
 }
 
+button {
+    display: inline-block;
+}
+
 #content {
     margin: auto;
     width: 98%;
@@ -34,29 +38,29 @@
     width: 100%;
 }
 
-td {
-    width: 33%;
-}
-
-.select-container {
-    display: block;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    text-align: center;
-}
-
-button {
-    display: inline-block;
-}
-
 #field-wrapper {
     display: table-cell;
     padding-left: 15px;
     vertical-align: middle;
 }
 
-.splitfield:first-child {
-    padding-top: 15px;
+.headline {
+    text-align: center;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.img-desc {
+   font-weight: bolder;
+   color: #08a;
+   font-size: 20px;
+}
+
+#image-wrapper {
+    display: table-cell;
+    float: left;
+    padding-left: 20%;
+    text-align: center;
 }
 
 .panelFooter, .panelHeader {
@@ -97,6 +101,13 @@ button {
     z-index: 1;
 }
 
+.select-container {
+    display: block;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
 .spinner {
     background-color: #888;
     border-color: #222;
@@ -128,29 +139,12 @@ button {
 
 }
 
-.headline {
-    text-align: center;
-    font-weight: bolder;
-    font-size: 20px;
-}
-
-.img-desc {
-   font-weight: bolder;
-   color: #08a;
-   font-size: 20px;
-}
-
-#image-wrapper {
-    display: table-cell;
-    float: left;
-    padding-left: 20%;
-    text-align: center;
+.splitfield:first-child {
+    padding-top: 15px;
 }
 
 #splitfields-image {
-    //display: table-cell;
     height: 80px;
-   // float: left;
 }
 
 .svgcontainer {
@@ -161,6 +155,11 @@ button {
     overflow-x: scroll;
     overflow-y: hidden;
     padding: 5px;
+}
+
+
+td {
+    width: 33%;
 }
 
 .textAxis path,
