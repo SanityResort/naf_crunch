@@ -225,7 +225,6 @@ let draw = function(tournaments, races, opponentRaces, splitFields, splitfieldNa
            headingLabels.push("Split On: " + splitfieldNames.join(', '))
 
             headingLabels.forEach(function(headingLabel, index){
-            console.log(index)
                 d3.select('#'+parent).append('p').attr('font-size', headingFontSize+'px')
                 .style('font-weight','bold').style('margin',headingSpacing+'px').text(headingLabel)
             })

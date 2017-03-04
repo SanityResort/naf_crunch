@@ -13,13 +13,12 @@
     ry: 5px;
 }
 
-button {
-    display: inline-block;
+#body {
+    background-color: #444;
 }
 
-#content {
-    margin: auto;
-    width: 98%;
+button {
+    display: inline-block;
 }
 
 .controlPanel {
@@ -38,9 +37,22 @@ button {
     width: 100%;
 }
 
+dt {
+    padding-top: 5px;
+}
+
+dl {
+    margin-left: 10px;
+}
+
+dt:after {
+  content: ": ";
+}
+
 #field-wrapper {
     display: table-cell;
     padding-left: 15px;
+    padding-top: 10px;
     vertical-align: middle;
 }
 
@@ -50,15 +62,38 @@ button {
     font-size: 20px;
 }
 
+#help {
+    background: #ffff9f;
+    border: 2px ridge;
+    border-radius: 10px;
+    display: none;
+    left: 2.5%;
+    margin: auto;
+    padding: 10px;
+    position: fixed;
+    top: 10px;
+    width: 95%;
+    z-index: 4;
+}
+
 #help-container {
     padding-right: 10%;
     text-align: right;
     width: 100%;
 }
 
-#help-container :after {
-
+#help-footer {
+    text-align: center;
 }
+
+#help-text {
+    padding-bottom: 10px;
+}
+
+html {
+    background-color: #444;
+}
+
 
 .img-desc {
    font-weight: bolder;
@@ -150,10 +185,6 @@ button {
 .splitfield {
     display: block;
 
-}
-
-.splitfield:first-child {
-    padding-top: 15px;
 }
 
 #splitfields-image {
