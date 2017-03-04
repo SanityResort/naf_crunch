@@ -54,111 +54,116 @@
             <tr id="controlPanel" aria-expanded="true" class="controlPanel collapse in">
                 <td id="filter">
                     <div class="headline">Select Data</div>
-                    <div class="select-container">
-                        <select id="tournaments" class="tournaments" multiple="multiple">
-                            <optgroup label="2016">
-                                <option value="EuroBowl - 2016" selected="selected">EuroBowl - 2016</option>
-                                <option value="EurOpen - 2016" selected="selected">EurOpen - 2010</option>
-                            </optgroup>
-                            <optgroup label="2014">
-                                <option value="EuroBowl - 2014" selected="selected">EuroBowl - 2014</option>
-                                <option value="EurOpen - 2014" selected="selected">EurOpen - 2014</option>
-                            </optgroup>
-                            <optgroup label="2013">
-                                <option value="EuroBowl - 2013" selected="selected">EuroBowl - 2013</option>
-                                <option value="EurOpen - 2013" selected="selected">EurOpen - 2013</option>
-                            </optgroup>
-                            <optgroup label="2012">
-                                <option value="EuroBowl - 2012" selected="selected">EuroBowl - 2012</option>
-                                <option value="EurOpen - 2012" selected="selected">EurOpen - 2012</option>
-                            </optgroup>
-                            <optgroup label="2010">
-                                <option value="EuroBowl - 2010" selected="selected">EuroBowl - 2010</option>
-                                <option value="EurOpen - 2010" selected="selected">EurOpen - 2010</option>
-                            </optgroup>
-                            <optgroup label="2009">
-                                <option value="EuroBowl - 2009" selected="selected">EuroBowl - 2009</option>
-                            </optgroup>
-                            <optgroup label="2008">
-                                <option value="EuroBowl - 2008" selected="selected">EuroBowl - 2008</option>
-                            </optgroup>
-                            <optgroup label="2006">
-                                <option value="EuroBowl - 2006" selected="selected">EuroBowl - 2006</option>
-                            </optgroup>
-                            <optgroup label="2005">
-                                <option value="EuroBowl - 2005" selected="selected">EuroBowl - 2005</option>
-                            </optgroup>
-                            <optgroup label="2004">
-                                <option value="EuroBowl - 2004" selected="selected">EuroBowl - 2004</option>
-                            </optgroup>
-                            <optgroup label="2003">
-                                <option value="EuroBowl - 2003" selected="selected">EuroBowl - 2003</option>
-                            </optgroup>
-                        </select>
-                    </div>
-                    <div class="select-container">
+                    <table>
+                        <tr class="select-container">
+                            <td><label class="select-label">Tournaments</label></td>
+                            <td><select id="tournaments" class="select" multiple="multiple">
+                                <optgroup label="2016">
+                                    <option value="EuroBowl - 2016" selected="selected">EuroBowl - 2016</option>
+                                    <option value="EurOpen - 2016" selected="selected">EurOpen - 2010</option>
+                                </optgroup>
+                                <optgroup label="2014">
+                                    <option value="EuroBowl - 2014" selected="selected">EuroBowl - 2014</option>
+                                    <option value="EurOpen - 2014" selected="selected">EurOpen - 2014</option>
+                                </optgroup>
+                                <optgroup label="2013">
+                                    <option value="EuroBowl - 2013" selected="selected">EuroBowl - 2013</option>
+                                    <option value="EurOpen - 2013" selected="selected">EurOpen - 2013</option>
+                                </optgroup>
+                                <optgroup label="2012">
+                                    <option value="EuroBowl - 2012" selected="selected">EuroBowl - 2012</option>
+                                    <option value="EurOpen - 2012" selected="selected">EurOpen - 2012</option>
+                                </optgroup>
+                                <optgroup label="2010">
+                                    <option value="EuroBowl - 2010" selected="selected">EuroBowl - 2010</option>
+                                    <option value="EurOpen - 2010" selected="selected">EurOpen - 2010</option>
+                                </optgroup>
+                                <optgroup label="2009">
+                                    <option value="EuroBowl - 2009" selected="selected">EuroBowl - 2009</option>
+                                </optgroup>
+                                <optgroup label="2008">
+                                    <option value="EuroBowl - 2008" selected="selected">EuroBowl - 2008</option>
+                                </optgroup>
+                                <optgroup label="2006">
+                                    <option value="EuroBowl - 2006" selected="selected">EuroBowl - 2006</option>
+                                </optgroup>
+                                <optgroup label="2005">
+                                    <option value="EuroBowl - 2005" selected="selected">EuroBowl - 2005</option>
+                                </optgroup>
+                                <optgroup label="2004">
+                                    <option value="EuroBowl - 2004" selected="selected">EuroBowl - 2004</option>
+                                </optgroup>
+                                <optgroup label="2003">
+                                    <option value="EuroBowl - 2003" selected="selected">EuroBowl - 2003</option>
+                                </optgroup>
+                            </select></td>
+                        </tr>
+                        <tr class="select-container">
 
-                        <select id="races" class="races" multiple="multiple">
-                            <option value="Amazons" selected="selected">Amazons</option>
-                            <option value="Chaos" selected="selected">Chaos</option>
-                            <option value="Chaos Dwarves" selected="selected">Chaos Dwarves</option>
-                            <option value="Chaos Pact" selected="selected">Chaos Pact</option>
-                            <option value="Dark Elves" selected="selected">Dark Elves</option>
-                            <option value="Dwarves" selected="selected">Dwarves</option>
-                            <option value="Elves" selected="selected">Elves</option>
-                            <option value="Goblins" selected="selected">Goblins</option>
-                            <option value="Halflings" selected="selected">Halflings</option>
-                            <option value="High Elves" selected="selected">High Elves</option>
-                            <option value="Humans" selected="selected">Humans</option>
-                            <option value="Khemri" selected="selected">Khemri</option>
-                            <option value="Lizardmen" selected="selected">Lizardmen</option>
-                            <option value="Necromantic" selected="selected">Necromantic</option>
-                            <option value="Norse" selected="selected">Norse</option>
-                            <option value="Nurgle's Rotters" selected="selected">Nurgle's Rotters</option>
-                            <option value="Ogres" selected="selected">Ogres</option>
-                            <option value="Orc" selected="selected">Orc</option>
-                            <option value="Skaven" selected="selected">Skaven</option>
-                            <option value="Slann" selected="selected">Slann</option>
-                            <option value="Undead" selected="selected">Undead</option>
-                            <option value="Underworld" selected="selected">Underworld</option>
-                            <option value="Vampires" selected="selected">Vampires</option>
-                            <option value="Wood Elves" selected="selected">Wood Elves</option>
-                        </select>
-                    </div>
-                    <div class="select-container">
-
-                        <select id="opponentraces" class="opponentraces" multiple="multiple">
-                            <option value="Amazons" selected="selected">Amazons</option>
-                            <option value="Chaos" selected="selected">Chaos</option>
-                            <option value="Chaos Dwarves" selected="selected">Chaos Dwarves</option>
-                            <option value="Chaos Pact" selected="selected">Chaos Pact</option>
-                            <option value="Dark Elves" selected="selected">Dark Elves</option>
-                            <option value="Dwarves" selected="selected">Dwarves</option>
-                            <option value="Elves" selected="selected">Elves</option>
-                            <option value="Goblins" selected="selected">Goblins</option>
-                            <option value="Halflings" selected="selected">Halflings</option>
-                            <option value="High Elves" selected="selected">High Elves</option>
-                            <option value="Humans" selected="selected">Humans</option>
-                            <option value="Khemri" selected="selected">Khemri</option>
-                            <option value="Lizardmen" selected="selected">Lizardmen</option>
-                            <option value="Necromantic" selected="selected">Necromantic</option>
-                            <option value="Norse" selected="selected">Norse</option>
-                            <option value="Nurgle's Rotters" selected="selected">Nurgle's Rotters</option>
-                            <option value="Ogres" selected="selected">Ogres</option>
-                            <option value="Orc" selected="selected">Orc</option>
-                            <option value="Skaven" selected="selected">Skaven</option>
-                            <option value="Slann" selected="selected">Slann</option>
-                            <option value="Undead" selected="selected">Undead</option>
-                            <option value="Underworld" selected="selected">Underworld</option>
-                            <option value="Vampires" selected="selected">Vampires</option>
-                            <option value="Wood Elves" selected="selected">Wood Elves</option>
-                        </select>
-                    </div>
+                            <td><label class="select-label">Races</label></td>
+                            <td><select id="races" class="select" multiple="multiple">
+                                <option value="Amazons" selected="selected">Amazons</option>
+                                <option value="Chaos" selected="selected">Chaos</option>
+                                <option value="Chaos Dwarves" selected="selected">Chaos Dwarves</option>
+                                <option value="Chaos Pact" selected="selected">Chaos Pact</option>
+                                <option value="Dark Elves" selected="selected">Dark Elves</option>
+                                <option value="Dwarves" selected="selected">Dwarves</option>
+                                <option value="Elves" selected="selected">Elves</option>
+                                <option value="Goblins" selected="selected">Goblins</option>
+                                <option value="Halflings" selected="selected">Halflings</option>
+                                <option value="High Elves" selected="selected">High Elves</option>
+                                <option value="Humans" selected="selected">Humans</option>
+                                <option value="Khemri" selected="selected">Khemri</option>
+                                <option value="Lizardmen" selected="selected">Lizardmen</option>
+                                <option value="Necromantic" selected="selected">Necromantic</option>
+                                <option value="Norse" selected="selected">Norse</option>
+                                <option value="Nurgle's Rotters" selected="selected">Nurgle's Rotters</option>
+                                <option value="Ogres" selected="selected">Ogres</option>
+                                <option value="Orc" selected="selected">Orc</option>
+                                <option value="Skaven" selected="selected">Skaven</option>
+                                <option value="Slann" selected="selected">Slann</option>
+                                <option value="Undead" selected="selected">Undead</option>
+                                <option value="Underworld" selected="selected">Underworld</option>
+                                <option value="Vampires" selected="selected">Vampires</option>
+                                <option value="Wood Elves" selected="selected">Wood Elves</option>
+                            </select></td>
+                        </tr>
+                        <tr class="select-container">
+                            <td>
+                                <label class="select-label">Opponent Races</label></td>
+                            <td><select id="opponentraces" class="select" multiple="multiple">
+                                <option value="Amazons" selected="selected">Amazons</option>
+                                <option value="Chaos" selected="selected">Chaos</option>
+                                <option value="Chaos Dwarves" selected="selected">Chaos Dwarves</option>
+                                <option value="Chaos Pact" selected="selected">Chaos Pact</option>
+                                <option value="Dark Elves" selected="selected">Dark Elves</option>
+                                <option value="Dwarves" selected="selected">Dwarves</option>
+                                <option value="Elves" selected="selected">Elves</option>
+                                <option value="Goblins" selected="selected">Goblins</option>
+                                <option value="Halflings" selected="selected">Halflings</option>
+                                <option value="High Elves" selected="selected">High Elves</option>
+                                <option value="Humans" selected="selected">Humans</option>
+                                <option value="Khemri" selected="selected">Khemri</option>
+                                <option value="Lizardmen" selected="selected">Lizardmen</option>
+                                <option value="Necromantic" selected="selected">Necromantic</option>
+                                <option value="Norse" selected="selected">Norse</option>
+                                <option value="Nurgle's Rotters" selected="selected">Nurgle's Rotters</option>
+                                <option value="Ogres" selected="selected">Ogres</option>
+                                <option value="Orc" selected="selected">Orc</option>
+                                <option value="Skaven" selected="selected">Skaven</option>
+                                <option value="Slann" selected="selected">Slann</option>
+                                <option value="Undead" selected="selected">Undead</option>
+                                <option value="Underworld" selected="selected">Underworld</option>
+                                <option value="Vampires" selected="selected">Vampires</option>
+                                <option value="Wood Elves" selected="selected">Wood Elves</option>
+                            </select></td>
+                        </tr>
+                    </table>
                 </td>
                 <td id="splitfields">
                     <div class="headline">Group By</div>
                     <div id="image-wrapper">
-                       <div class="img-desc">Fine</div>
+                        <div class="img-desc">Fine</div>
                         <img id="splitfields-image" src="img/splitfields.svg"/>
                         <div class="img-desc">Coarse</div>
 
@@ -171,6 +176,9 @@
                     </div>
                 </td>
                 <td id="buttons">
+                    <div id="help-container">
+                        <img id="help-icon" src="img/help.svg">
+                    </div>
                     <div class="select-container">
                         <button id="createButton">Create graph</button>
                     </div>
@@ -255,6 +263,8 @@
     });
 
 
+
+
     </script>
 </div>
 
@@ -267,6 +277,13 @@
         </linearGradient>
     </defs>
 </svg>
+<div id="help-text">
+    <dl>
+        <dt>Select Data</dt>
+        <dd>Here you can choose which tournaments you want to include in the graph.</dd>
+        <dt></dt>
+    </dl>
 
+</div>
 </body>
 </html>

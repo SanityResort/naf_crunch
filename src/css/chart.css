@@ -50,6 +50,16 @@ button {
     font-size: 20px;
 }
 
+#help-container {
+    padding-right: 10%;
+    text-align: right;
+    width: 100%;
+}
+
+#help-container :after {
+
+}
+
 .img-desc {
    font-weight: bolder;
    color: #08a;
@@ -102,10 +112,13 @@ button {
 }
 
 .select-container {
-    display: block;
     padding-top: 5px;
     padding-bottom: 5px;
     text-align: center;
+}
+
+.select {
+    display: table-cell;
 }
 
 .spinner {
